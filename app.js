@@ -25,6 +25,18 @@ function getGameDateTime(gameId) {
     return null;
 }
 
+function findGame(gameId) {
+    for (const grupo of Object.values(GRUPOS_COPA_2026)) {
+        const jogo = grupo.jogos.find(j => j.id === gameId);
+        if (jogo) return jogo;
+    }
+    for (const stage of Object.values(KNOCKOUT_STAGES_2026)) {
+        const jogo = stage.jogos.find(j => j.id === gameId);
+        if (jogo) return jogo;
+    }
+    return null;
+}
+
 function isGameLocked(gameId) {
     const gameTime = getGameDateTime(gameId);
     if (!gameTime) return false;
@@ -951,6 +963,26 @@ function renderRanking() {
 // REVELAÇÃO DE PALPITES (após bloqueio, todos veem os palpites de todos)
 // ====================
 
+// Bloco "Resultado final" — mostra o placar real quando o resultado já saiu.
+function resultadoFinalHtml(gameId) {
+    const r = state.gameResults[gameId];
+    if (!r || r.homeGoals === undefined || r.homeGoals === null) return '';
+    const jogo  = findGame(gameId);
+    const home  = jogo?.home || '';
+    const away  = jogo?.away || '';
+    const advHtml = r.advancedTeam
+        ? `<div class="res-adv">Avança: ${flagFor(r.advancedTeam)} ${r.advancedTeam}</div>` : '';
+    return `<div class="result-box">
+        <div class="res-head">✅ Resultado final</div>
+        <div class="res-score">
+            <span class="res-team">${flagFor(home)} ${home}</span>
+            <span class="res-pts">${r.homeGoals} – ${r.awayGoals}</span>
+            <span class="res-team">${away} ${flagFor(away)}</span>
+        </div>
+        ${advHtml}
+    </div>`;
+}
+
 function revealGameHtml(gameId, isKnockout) {
     const linhas = state.participants.map(p => {
         const pred   = state.gamesPredictions[p.id]?.[gameId];
@@ -968,7 +1000,8 @@ function revealGameHtml(gameId, isKnockout) {
     }).filter(Boolean);
 
     const corpo = linhas.length ? linhas.join('') : `<div class="rv-empty">Ninguém palpitou neste jogo.</div>`;
-    return `<div class="reveal-box"><div class="rv-head">👁 Palpites revelados</div>${corpo}</div>`;
+    // "Resultado final" aparece logo abaixo do palpite e antes dos palpites de todos.
+    return `${resultadoFinalHtml(gameId)}<div class="reveal-box"><div class="rv-head">👁 Palpites revelados</div>${corpo}</div>`;
 }
 
 function revealOverallHtml() {
