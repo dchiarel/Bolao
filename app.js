@@ -518,16 +518,17 @@ function fmtData(d){ if(!d) return ''; const p = d.split('-'); return p.length==
 function splitPlacar(str){ const p = (str || '').split('-'); return { h: p[0] || '', a: p[1] || '' }; }
 
 // salva placar a partir de dois campos numéricos (mantém formato "h-a")
-function setPlacar(pid, gameId, side, value){
+function setPlacar(pid, gameId, side, value, prefix){
+    prefix = prefix || '';
     const cur = getGamePrediction(pid, gameId, 'winner') || '';
     let { h, a } = splitPlacar(cur);
     value = (value === '' ? '' : String(Math.max(0, parseInt(value) || 0)));
     if (side === 'h') h = value; else a = value;
     const combined = (h === '' && a === '') ? '' : `${h}-${a}`;
     setGamePrediction(pid, gameId, 'winner', combined);
-    const row = document.getElementById('row-' + pid + '-' + gameId);
+    const row = document.getElementById(prefix + 'row-' + pid + '-' + gameId);
     if (row) row.classList.toggle('done', h !== '' && a !== '');
-    const dt = document.getElementById('dt-' + pid + '-' + gameId);
+    const dt = document.getElementById(prefix + 'dt-' + pid + '-' + gameId);
     if (dt) dt.classList.toggle('ok', h !== '' && a !== '');
 }
 
@@ -1133,6 +1134,65 @@ function renderOverall() {
 // RENDER GAME PHASES
 // ====================
 
+// Lista plana de todos os jogos com times definidos (não-TBD), em ordem cronológica.
+function jogosCronologicos() {
+    const todos = [];
+    Object.values(GRUPOS_COPA_2026).forEach(g => g.jogos.forEach(j => todos.push(j)));
+    Object.values(KNOCKOUT_STAGES_2026).forEach(s => s.jogos.forEach(j => todos.push(j)));
+    return todos
+        .filter(j => j.home && j.away && j.home !== 'TBD' && j.away !== 'TBD')
+        .sort((x, y) => {
+            const dx = getGameDateTime(x.id)?.getTime() ?? Infinity;
+            const dy = getGameDateTime(y.id)?.getTime() ?? Infinity;
+            return dx - dy;
+        });
+}
+
+// Aba "Próximos jogos": só os jogos ainda abertos para palpite, em ordem
+// cronológica, com o mesmo timer de bloqueio. O palpite é o mesmo da aba do
+// jogo (mesmo estado) e fecha junto. Não mostra palpites dos outros.
+function renderProximosJogos() {
+    const container = document.getElementById('proximos');
+    let html = `<h2 class="section-title"><svg class="ti-ic"><use href="#ic-grupos"></use></svg> Próximos Jogos</h2>
+        <div class="info-box"><span>Jogos ainda abertos, em ordem cronológica. O palpite aqui é o mesmo da aba do jogo e fecha junto.</span></div>`;
+
+    if (state.participants.length === 0) {
+        html += `<div class="empty-hint">Adicione participantes na aba Home para começar os palpites.</div>`;
+        container.innerHTML = html;
+        return;
+    }
+    const participant = getCurrentParticipant();
+    if (!participant) { container.innerHTML = html; return; }
+
+    const abertos = jogosCronologicos().filter(j => !isGameLocked(j.id));
+    if (abertos.length === 0) {
+        html += `<div class="empty-hint">Nenhum jogo aberto para palpite no momento. 🎉</div>`;
+        container.innerHTML = html;
+        return;
+    }
+
+    html += `<div class="player-block">`;
+    abertos.forEach(jogo => {
+        const { h, a } = splitPlacar(getGamePrediction(participant.id, jogo.id, 'winner'));
+        const filled = h !== '' && a !== '';
+        const badge  = badgeBloqueio(jogo.id);
+        html += `<div class="match-row ${filled ? 'done' : ''}" id="prox-row-${participant.id}-${jogo.id}">
+            <div class="team home"><span class="tn">${jogo.home}</span><span class="tflag">${flagFor(jogo.home)}</span></div>
+            <div class="placar-col">
+                <div class="placar">
+                    <input type="number" min="0" class="placar-input" value="${h}" onchange="setPlacar(${participant.id},'${jogo.id}','h',this.value,'prox-')">
+                    <span class="placar-sep">–</span>
+                    <input type="number" min="0" class="placar-input" value="${a}" onchange="setPlacar(${participant.id},'${jogo.id}','a',this.value,'prox-')">
+                </div>
+                <div class="match-date ${filled ? 'ok' : ''}" id="prox-dt-${participant.id}-${jogo.id}">${fmtData(jogo.data)} ${jogo.hora}h ${badge}</div>
+            </div>
+            <div class="team away"><span class="tflag">${flagFor(jogo.away)}</span><span class="tn">${jogo.away}</span></div>
+        </div>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
 function renderGroupStage() {
     const container = document.getElementById('grupos');
     let html = `<h2 class="section-title"><svg class="ti-ic"><use href="#ic-grupos"></use></svg> Fase de Grupos</h2>
@@ -1303,7 +1363,8 @@ function switchTab(tabName) {
     const TITLES = {
         home:['ic-home','Home'], overall:['ic-prev','Previsões Gerais'], grupos:['ic-grupos','Fase de Grupos'],
         r16:['ic-bracket','16avos de Final'], oitavas:['ic-bracket','Oitavas de Final'], quartas:['ic-bracket','Quartas de Final'],
-        semis:['ic-bracket','Semifinais'], final:['ic-trophy','Final'], ranking:['ic-ranking','Classificação']
+        semis:['ic-bracket','Semifinais'], final:['ic-trophy','Final'], ranking:['ic-ranking','Classificação'],
+        proximos:['ic-grupos','Próximos Jogos']
     };
     const pt = document.getElementById('pageTitle');
     if (pt && TITLES[tabName]) pt.innerHTML = `<svg class="ti-ic"><use href="#${TITLES[tabName][0]}"></use></svg> ${TITLES[tabName][1]}`;
@@ -1313,7 +1374,7 @@ function switchTab(tabName) {
     window.scrollTo(0, 0);
 
     // Abas de palpites exigem login
-    const PRED_TABS = ['overall','grupos','r16','oitavas','quartas','semis','final'];
+    const PRED_TABS = ['overall','grupos','proximos','r16','oitavas','quartas','semis','final'];
     if (PRED_TABS.includes(tabName) && !isLoggedIn()) {
         // Na aba 'overall' o aviso vai DENTRO do container (preserva o cabeçalho da seção);
         // nas demais, o render reescreve a seção inteira no próximo acesso.
@@ -1339,6 +1400,8 @@ function switchTab(tabName) {
         renderOverall();
     } else if (tabName === 'grupos') {
         renderGroupStage();
+    } else if (tabName === 'proximos') {
+        renderProximosJogos();
     } else if (tabName === 'r16') {
         renderKnockoutPhase('16avos');
     } else if (tabName === 'oitavas') {
