@@ -360,6 +360,18 @@ async function buscarTheSportsDB() {
 }
 
 // ============================================================
+// CORREÇÕES MANUAIS
+// Aplicadas SEMPRE por último, sobrescrevendo qualquer fonte. Use quando uma
+// fonte publicar um placar errado (ex.: dado provisório/incorreto). Assim a
+// correção "gruda" e não é desfeita nas próximas execuções do robô.
+// Formato: 'gameId': { homeGoals, awayGoals, advancedTeam }
+// (advancedTeam = time da casa se venceu, visitante se venceu, '' se empate)
+// ============================================================
+const CORRECOES_MANUAIS = {
+    'e1': { homeGoals: 7, awayGoals: 1, advancedTeam: 'Alemanha' }, // Alemanha 7 x 1 Curaçao
+};
+
+// ============================================================
 // MAIN
 // ============================================================
 async function main() {
@@ -413,6 +425,19 @@ async function main() {
 
     // Mesclar com dados anteriores (nunca perde dados já registrados)
     const gameResultsMerged = { ...dadosAtuais.gameResults, ...novosResultados };
+
+    // Correções manuais: sobrescrevem qualquer fonte (última palavra).
+    Object.entries(CORRECOES_MANUAIS).forEach(([gameId, c]) => {
+        gameResultsMerged[gameId] = {
+            homeGoals: c.homeGoals,
+            awayGoals: c.awayGoals,
+            advancedTeam: c.advancedTeam || '',
+            redCards: gameResultsMerged[gameId]?.redCards || { home: [], away: [] },
+            fonte: 'correção manual',
+            updatedAt: new Date().toISOString()
+        };
+        console.log(`✏️  Correção manual aplicada: ${gameId} = ${c.homeGoals}-${c.awayGoals}`);
+    });
 
     // Acumular cartões vermelhos
     const redCards = { ...(dadosAtuais.redCards || {}) };

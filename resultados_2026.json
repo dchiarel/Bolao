@@ -92,14 +92,14 @@
       "updatedAt": "2026-06-14T17:23:32.655Z"
     },
     "e1": {
-      "homeGoals": 1,
+      "homeGoals": 7,
       "awayGoals": 1,
-      "advancedTeam": "",
+      "advancedTeam": "Alemanha",
       "redCards": {
         "home": [],
         "away": []
       },
-      "fonte": "thesportsdb",
+      "fonte": "correção manual",
       "updatedAt": "2026-06-14T17:23:42.972Z"
     }
   },
