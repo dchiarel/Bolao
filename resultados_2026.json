@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-06-14T10:51:33.761Z",
-  "fonte": "openfootball (6) + thesportsdb (2)",
+  "updatedAt": "2026-06-14T14:12:22.096Z",
+  "fonte": "openfootball (7) + thesportsdb (1)",
   "totalJogosComResultado": 8,
   "gameResults": {
     "a1": {
@@ -12,7 +12,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-14T10:51:27.278Z"
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     },
     "a2": {
       "homeGoals": 2,
@@ -23,7 +23,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-14T10:51:27.279Z"
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     },
     "b1": {
       "homeGoals": 1,
@@ -34,7 +34,7 @@
         "away": []
       },
       "fonte": "thesportsdb",
-      "updatedAt": "2026-06-14T10:51:33.761Z"
+      "updatedAt": "2026-06-14T14:12:22.096Z"
     },
     "d1": {
       "homeGoals": 4,
@@ -45,7 +45,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-14T10:51:27.279Z"
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     },
     "b2": {
       "homeGoals": 1,
@@ -56,7 +56,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-14T10:51:27.279Z"
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     },
     "c1": {
       "homeGoals": 1,
@@ -67,7 +67,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-14T10:51:27.279Z"
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     },
     "c2": {
       "homeGoals": 0,
@@ -78,7 +78,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-14T10:51:27.279Z"
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     },
     "d2": {
       "homeGoals": 2,
@@ -88,8 +88,8 @@
         "home": [],
         "away": []
       },
-      "fonte": "thesportsdb",
-      "updatedAt": "2026-06-14T10:51:33.761Z"
+      "fonte": "openfootball",
+      "updatedAt": "2026-06-14T14:12:20.048Z"
     }
   },
   "overallResults": {
