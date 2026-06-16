@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-06-14T17:23:42.972Z",
-  "fonte": "openfootball (7) + thesportsdb (2)",
-  "totalJogosComResultado": 9,
+  "updatedAt": "2026-06-16T00:38:00.000Z",
+  "fonte": "openfootball (7) + thesportsdb (2) + correção manual (1)",
+  "totalJogosComResultado": 10,
   "gameResults": {
     "a1": {
       "homeGoals": 2,
@@ -101,6 +101,17 @@
       },
       "fonte": "correção manual",
       "updatedAt": "2026-06-14T17:23:42.972Z"
+    },
+    "g1": {
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "advancedTeam": "",
+      "redCards": {
+        "home": [],
+        "away": []
+      },
+      "fonte": "correção manual",
+      "updatedAt": "2026-06-16T00:38:00.000Z"
     }
   },
   "overallResults": {
