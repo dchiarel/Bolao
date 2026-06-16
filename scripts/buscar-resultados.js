@@ -365,6 +365,7 @@ async function buscarTheSportsDB() {
 const CORRECOES_MANUAIS = {
     'e1': { homeGoals: 7, awayGoals: 1, advancedTeam: 'Alemanha' }, // Alemanha 7 x 1 Curaçao
     'g1': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Bélgica 1 x 1 Egito
+    'g2': { homeGoals: 2, awayGoals: 2, advancedTeam: '' }, // Irã 2 x 2 Nova Zelândia
 };
 
 // ============================================================
