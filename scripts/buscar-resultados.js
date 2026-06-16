@@ -24,7 +24,7 @@ const NOME_MAP = {
     // Português / Inglês / Espanhol
     'brazil': 'Brasil', 'brasil': 'Brasil',
     'argentina': 'Argentina',
-    'france': 'França', 'franca': 'França', 'france': 'França',
+    'france': 'França', 'franca': 'França',
     'germany': 'Alemanha', 'allemagne': 'Alemanha',
     'england': 'Inglaterra',
     'spain': 'Espanha', 'espana': 'Espanha',
@@ -187,15 +187,12 @@ async function buscarOpenFootball() {
 
     const gameResults = {};
 
-    // Suporta tanto array flat (matches) quanto rounds[].matches
     let allMatches = [];
     if (Array.isArray(data.matches)) {
         const primeiro = data.matches[0];
         if (primeiro && Array.isArray(primeiro.matches)) {
-            // rounds[].matches
             data.matches.forEach(r => allMatches.push(...(r.matches || [])));
         } else {
-            // array flat
             allMatches = data.matches;
         }
     } else if (Array.isArray(data.rounds)) {
@@ -307,7 +304,6 @@ async function buscarTheSportsDB() {
     console.log('🔄 Buscando TheSportsDB (gratuito)...');
     const gameResults = {};
 
-    // Busca jogos já realizados (últimos resultados da liga 4429)
     const urls = [
         'https://www.thesportsdb.com/api/v1/json/3/eventsseason.php?id=4429&s=2026',
         'https://www.thesportsdb.com/api/v1/json/3/eventspastleague.php?id=4429',
@@ -326,7 +322,6 @@ async function buscarTheSportsDB() {
         }
     }
 
-    // Deduplica por idEvent
     const seen = new Set();
     allEvents = allEvents.filter(ev => {
         if (seen.has(ev.idEvent)) return false;
@@ -369,6 +364,7 @@ async function buscarTheSportsDB() {
 // ============================================================
 const CORRECOES_MANUAIS = {
     'e1': { homeGoals: 7, awayGoals: 1, advancedTeam: 'Alemanha' }, // Alemanha 7 x 1 Curaçao
+    'g1': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Bélgica 1 x 1 Egito
 };
 
 // ============================================================
@@ -379,7 +375,6 @@ async function main() {
     console.log(`🕐 ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} (BRT)`);
     console.log('━'.repeat(50));
 
-    // Ler dados existentes
     let dadosAtuais = {
         gameResults: {}, overallResults: {}, knockoutTeams: {}, redCards: {}
     };
@@ -394,8 +389,6 @@ async function main() {
     let novosResultados = {};
     const fontesUsadas = [];
 
-    // Combinar TODAS as fontes. Prioridade pela ordem: a primeira fonte que
-    // tiver um jogo é a "dona" dele; as seguintes só preenchem o que faltar.
     const fontes = [
         { nome: 'openfootball',  fn: buscarOpenFootball },
         { nome: 'worldcup26.ir', fn: buscarWorldcup26ir },
@@ -423,10 +416,8 @@ async function main() {
         console.log('ℹ️ Nenhum resultado novo encontrado (Copa ainda não começou ou APIs offline)');
     }
 
-    // Mesclar com dados anteriores (nunca perde dados já registrados)
     const gameResultsMerged = { ...dadosAtuais.gameResults, ...novosResultados };
 
-    // Correções manuais: sobrescrevem qualquer fonte (última palavra).
     Object.entries(CORRECOES_MANUAIS).forEach(([gameId, c]) => {
         gameResultsMerged[gameId] = {
             homeGoals: c.homeGoals,
@@ -439,7 +430,6 @@ async function main() {
         console.log(`✏️  Correção manual aplicada: ${gameId} = ${c.homeGoals}-${c.awayGoals}`);
     });
 
-    // Acumular cartões vermelhos
     const redCards = { ...(dadosAtuais.redCards || {}) };
     Object.entries(novosResultados).forEach(([gameId, result]) => {
         if (result.redCards?.home?.length || result.redCards?.away?.length) {
@@ -447,7 +437,6 @@ async function main() {
         }
     });
 
-    // Salvar
     const output = {
         updatedAt: new Date().toISOString(),
         fonte,
