@@ -20,8 +20,8 @@ const GRUPOS_COPA_2026 = {
         jogos: [
             { id: 'b1', home: 'Canadá',               away: 'Bósnia e Herzegovina', data: '2026-06-12', hora: '16:00' },
             { id: 'b2', home: 'Catar',                away: 'Suíça',                data: '2026-06-13', hora: '16:00' },
-            { id: 'b3', home: 'Canadá',               away: 'Catar',                data: '2026-06-18', hora: '16:00' },
-            { id: 'b4', home: 'Suíça',                away: 'Bósnia e Herzegovina', data: '2026-06-18', hora: '19:00' },
+            { id: 'b3', home: 'Canadá',               away: 'Catar',                data: '2026-06-18', hora: '19:00' },
+            { id: 'b4', home: 'Suíça',                away: 'Bósnia e Herzegovina', data: '2026-06-18', hora: '16:00' },
             { id: 'b5', home: 'Suíça',                away: 'Canadá',               data: '2026-06-24', hora: '16:00' },
             { id: 'b6', home: 'Bósnia e Herzegovina', away: 'Catar',                data: '2026-06-24', hora: '16:00' },
         ]
@@ -31,7 +31,7 @@ const GRUPOS_COPA_2026 = {
             { id: 'c1', home: 'Brasil',   away: 'Marrocos', data: '2026-06-13', hora: '19:00' },
             { id: 'c2', home: 'Haiti',    away: 'Escócia',  data: '2026-06-13', hora: '22:00' },
             { id: 'c3', home: 'Escócia',  away: 'Marrocos', data: '2026-06-19', hora: '19:00' },
-            { id: 'c4', home: 'Brasil',   away: 'Haiti',    data: '2026-06-19', hora: '21:30' },
+            { id: 'c4', home: 'Brasil',   away: 'Haiti',    data: '2026-06-19', hora: '22:00' },
             { id: 'c5', home: 'Marrocos', away: 'Haiti',    data: '2026-06-24', hora: '19:00' },
             { id: 'c6', home: 'Escócia',  away: 'Brasil',   data: '2026-06-24', hora: '19:00' },
         ]
@@ -40,8 +40,8 @@ const GRUPOS_COPA_2026 = {
         jogos: [
             { id: 'd1', home: 'Estados Unidos', away: 'Paraguai',       data: '2026-06-12', hora: '22:00' },
             { id: 'd2', home: 'Austrália',      away: 'Turquia',        data: '2026-06-14', hora: '01:00' },
-            { id: 'd3', home: 'Turquia',        away: 'Paraguai',       data: '2026-06-19', hora: '16:00' },
-            { id: 'd4', home: 'Estados Unidos', away: 'Austrália',      data: '2026-06-20', hora: '00:00' },
+            { id: 'd3', home: 'Turquia',        away: 'Paraguai',       data: '2026-06-20', hora: '01:00' },
+            { id: 'd4', home: 'Estados Unidos', away: 'Austrália',      data: '2026-06-19', hora: '16:00' },
             { id: 'd5', home: 'Turquia',        away: 'Estados Unidos', data: '2026-06-25', hora: '23:00' },
             { id: 'd6', home: 'Paraguai',       away: 'Austrália',      data: '2026-06-25', hora: '23:00' },
         ]
@@ -60,8 +60,8 @@ const GRUPOS_COPA_2026 = {
         jogos: [
             { id: 'f1', home: 'Países Baixos', away: 'Japão',         data: '2026-06-14', hora: '17:00' },
             { id: 'f2', home: 'Suécia',        away: 'Tunísia',       data: '2026-06-14', hora: '23:00' },
-            { id: 'f3', home: 'Tunísia',       away: 'Japão',         data: '2026-06-20', hora: '14:00' },
-            { id: 'f4', home: 'Países Baixos', away: 'Suécia',        data: '2026-06-21', hora: '01:00' },
+            { id: 'f3', home: 'Tunísia',       away: 'Japão',         data: '2026-06-21', hora: '01:00' },
+            { id: 'f4', home: 'Países Baixos', away: 'Suécia',        data: '2026-06-20', hora: '14:00' },
             { id: 'f5', home: 'Tunísia',       away: 'Países Baixos', data: '2026-06-25', hora: '20:00' },
             { id: 'f6', home: 'Japão',         away: 'Suécia',        data: '2026-06-25', hora: '20:00' },
         ]
