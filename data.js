@@ -31,7 +31,7 @@ const GRUPOS_COPA_2026 = {
             { id: 'c1', home: 'Brasil',   away: 'Marrocos', data: '2026-06-13', hora: '19:00' },
             { id: 'c2', home: 'Haiti',    away: 'Escócia',  data: '2026-06-13', hora: '22:00' },
             { id: 'c3', home: 'Escócia',  away: 'Marrocos', data: '2026-06-19', hora: '19:00' },
-            { id: 'c4', home: 'Brasil',   away: 'Haiti',    data: '2026-06-19', hora: '22:00' },
+            { id: 'c4', home: 'Brasil',   away: 'Haiti',    data: '2026-06-19', hora: '21:30' },
             { id: 'c5', home: 'Marrocos', away: 'Haiti',    data: '2026-06-24', hora: '19:00' },
             { id: 'c6', home: 'Escócia',  away: 'Brasil',   data: '2026-06-24', hora: '19:00' },
         ]
@@ -40,7 +40,7 @@ const GRUPOS_COPA_2026 = {
         jogos: [
             { id: 'd1', home: 'Estados Unidos', away: 'Paraguai',       data: '2026-06-12', hora: '22:00' },
             { id: 'd2', home: 'Austrália',      away: 'Turquia',        data: '2026-06-14', hora: '01:00' },
-            { id: 'd3', home: 'Turquia',        away: 'Paraguai',       data: '2026-06-20', hora: '01:00' },
+            { id: 'd3', home: 'Turquia',        away: 'Paraguai',       data: '2026-06-20', hora: '00:00' },
             { id: 'd4', home: 'Estados Unidos', away: 'Austrália',      data: '2026-06-19', hora: '16:00' },
             { id: 'd5', home: 'Turquia',        away: 'Estados Unidos', data: '2026-06-25', hora: '23:00' },
             { id: 'd6', home: 'Paraguai',       away: 'Austrália',      data: '2026-06-25', hora: '23:00' },
