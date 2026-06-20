@@ -1561,6 +1561,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (syncOn()) {
         setInterval(async () => {
             await fetchRemoteState();
+            // Recarrega também os resultados dos jogos, senão um aparelho que
+            // ficou com a página aberta segue pontuando com placares antigos.
+            try { await carregarResultadosRemotos(); } catch (e) {}
             renderParticipants();
             const rk = document.getElementById('ranking');
             if (rk && rk.classList.contains('active')) renderRanking();
