@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T11:19:48.793Z",
+  "updatedAt": "2026-06-21T14:20:35.639Z",
   "fonte": "openfootball (33) + thesportsdb (1)",
   "totalJogosComResultado": 35,
   "gameResults": {
@@ -12,7 +12,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "a2": {
       "homeGoals": 2,
@@ -23,7 +23,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "b1": {
       "homeGoals": 1,
@@ -34,7 +34,7 @@
         "away": []
       },
       "fonte": "thesportsdb",
-      "updatedAt": "2026-06-21T11:19:48.793Z"
+      "updatedAt": "2026-06-21T14:20:35.639Z"
     },
     "d1": {
       "homeGoals": 4,
@@ -45,7 +45,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "b2": {
       "homeGoals": 1,
@@ -56,7 +56,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "c1": {
       "homeGoals": 1,
@@ -67,7 +67,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "c2": {
       "homeGoals": 0,
@@ -78,7 +78,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "d2": {
       "homeGoals": 2,
@@ -89,7 +89,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "e1": {
       "homeGoals": 7,
@@ -100,7 +100,7 @@
         "away": []
       },
       "fonte": "correção manual",
-      "updatedAt": "2026-06-21T11:19:48.793Z"
+      "updatedAt": "2026-06-21T14:20:35.639Z"
     },
     "f1": {
       "homeGoals": 2,
@@ -111,7 +111,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "e2": {
       "homeGoals": 1,
@@ -122,7 +122,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "f2": {
       "homeGoals": 5,
@@ -133,7 +133,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "g1": {
       "homeGoals": 1,
@@ -144,7 +144,7 @@
         "away": []
       },
       "fonte": "correção manual",
-      "updatedAt": "2026-06-21T11:19:48.793Z"
+      "updatedAt": "2026-06-21T14:20:35.639Z"
     },
     "g2": {
       "homeGoals": 2,
@@ -155,7 +155,7 @@
         "away": []
       },
       "fonte": "correção manual",
-      "updatedAt": "2026-06-21T11:19:48.793Z"
+      "updatedAt": "2026-06-21T14:20:35.639Z"
     },
     "h1": {
       "homeGoals": 0,
@@ -166,7 +166,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "h2": {
       "homeGoals": 1,
@@ -177,7 +177,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "i1": {
       "homeGoals": 3,
@@ -188,7 +188,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "i2": {
       "homeGoals": 1,
@@ -199,7 +199,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "j1": {
       "homeGoals": 3,
@@ -210,7 +210,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "j2": {
       "homeGoals": 3,
@@ -221,7 +221,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "k1": {
       "homeGoals": 1,
@@ -232,7 +232,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "l1": {
       "homeGoals": 4,
@@ -243,7 +243,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "k2": {
       "homeGoals": 1,
@@ -254,7 +254,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "l2": {
       "homeGoals": 1,
@@ -265,7 +265,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "a3": {
       "homeGoals": 1,
@@ -276,7 +276,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "b3": {
       "homeGoals": 6,
@@ -287,7 +287,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "a4": {
       "homeGoals": 1,
@@ -298,7 +298,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "d4": {
       "homeGoals": 2,
@@ -309,7 +309,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "c3": {
       "homeGoals": 0,
@@ -320,7 +320,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "c4": {
       "homeGoals": 3,
@@ -331,7 +331,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "d3": {
       "homeGoals": 0,
@@ -342,7 +342,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "f4": {
       "homeGoals": 5,
@@ -353,7 +353,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "e3": {
       "homeGoals": 2,
@@ -364,7 +364,7 @@
         "away": []
       },
       "fonte": "correção manual",
-      "updatedAt": "2026-06-21T11:19:48.793Z"
+      "updatedAt": "2026-06-21T14:20:35.639Z"
     },
     "e4": {
       "homeGoals": 0,
@@ -375,7 +375,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     },
     "f3": {
       "homeGoals": 0,
@@ -386,7 +386,7 @@
         "away": []
       },
       "fonte": "openfootball",
-      "updatedAt": "2026-06-21T11:19:37.083Z"
+      "updatedAt": "2026-06-21T14:20:24.458Z"
     }
   },
   "overallResults": {
