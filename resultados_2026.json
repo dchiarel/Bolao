@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-06-20T21:21:27.936Z",
-  "fonte": "openfootball (30) + thesportsdb (2)",
+  "updatedAt": "2026-06-20T22:00:00.000Z",
+  "fonte": "openfootball (29) + thesportsdb (1) + correção manual (3)",
   "totalJogosComResultado": 33,
   "gameResults": {
     "a1": {
@@ -356,15 +356,15 @@
       "updatedAt": "2026-06-20T21:21:27.014Z"
     },
     "e3": {
-      "homeGoals": 0,
+      "homeGoals": 2,
       "awayGoals": 1,
-      "advancedTeam": "Costa do Marfim",
+      "advancedTeam": "Alemanha",
       "redCards": {
         "home": [],
         "away": []
       },
-      "fonte": "thesportsdb",
-      "updatedAt": "2026-06-20T21:21:27.935Z"
+      "fonte": "correção manual",
+      "updatedAt": "2026-06-20T22:00:00.000Z"
     }
   },
   "overallResults": {
