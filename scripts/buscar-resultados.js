@@ -367,6 +367,9 @@ const CORRECOES_MANUAIS = {
     'g1': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Bélgica 1 x 1 Egito
     'g2': { homeGoals: 2, awayGoals: 2, advancedTeam: '' }, // Irã 2 x 2 Nova Zelândia
     'e3': { homeGoals: 2, awayGoals: 1, advancedTeam: 'Alemanha' }, // Alemanha 2 x 1 Costa do Marfim
+    'b4': { homeGoals: 4, awayGoals: 1, advancedTeam: 'Suíça' }, // Suíça 4 x 1 Bósnia
+    'g4': { homeGoals: 1, awayGoals: 3, advancedTeam: 'Egito' }, // Nova Zelândia 1 x 3 Egito
+    'g6': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Egito 1 x 1 Irã
 };
 
 // ============================================================
