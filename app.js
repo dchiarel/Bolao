@@ -574,6 +574,8 @@ async function carregarResultadosRemotos() {
         if (dados.knockoutTeams) {
             atualizarTimesKnockout(dados.knockoutTeams);
         }
+        // Preenche oitavas..final a partir dos resultados do mata-mata
+        preencherChaveamento();
 
         saveState();
         console.log('✅ Resultados remotos carregados:', new Date(dados.updatedAt || Date.now()).toLocaleString('pt-BR'));
@@ -592,6 +594,38 @@ function atualizarTimesKnockout(knockoutTeams) {
                 jogo.away = teams.away || jogo.away;
             }
         }
+    });
+}
+
+// ====================
+// AVANÇO DO MATA-MATA (preenche oitavas → final a partir dos resultados)
+// Cada jogo do mata-mata (exceto 28-avos) tem fromHome/fromAway = id do jogo
+// cujo VENCEDOR entra naquele lado. O 3º lugar (tipo: 'terceiro') usa os
+// PERDEDORES das semifinais. O vencedor vem de result.advancedTeam (definido
+// pelo robô; jogos decididos nos pênaltis são ajustados por correção manual).
+// ====================
+function vencedorJogo(gameId) {
+    const r = state.gameResults[gameId];
+    return (r && r.advancedTeam) ? r.advancedTeam : null;
+}
+function perdedorJogo(gameId) {
+    const r = state.gameResults[gameId];
+    if (!r || !r.advancedTeam) return null;
+    const j = findGame(gameId);
+    if (!j || j.home === 'TBD' || j.away === 'TBD') return null;
+    return r.advancedTeam === j.home ? j.away : j.home;
+}
+function preencherChaveamento() {
+    ['oitavas', 'quartas', 'semis', 'final'].forEach(key => {
+        (KNOCKOUT_STAGES_2026[key] ? KNOCKOUT_STAGES_2026[key].jogos : []).forEach(j => {
+            if (j.tipo === 'terceiro') {
+                j.home = perdedorJogo(j.fromHome) || 'TBD';
+                j.away = perdedorJogo(j.fromAway) || 'TBD';
+            } else {
+                if (j.fromHome) j.home = vencedorJogo(j.fromHome) || 'TBD';
+                if (j.fromAway) j.away = vencedorJogo(j.fromAway) || 'TBD';
+            }
+        });
     });
 }
 
@@ -1342,6 +1376,61 @@ function renderKnockoutPhase(phaseName) {
 }
 
 // ====================
+// CHAVEAMENTO (página só de consulta — árvore do mata-mata)
+// ====================
+function slotChaveamento(jogo, side) {
+    const t = side === 'home' ? jogo.home : jogo.away;
+    if (t && t !== 'TBD') return `${flagFor(t)} <span class="ch-nm">${t}</span>`;
+    const fromId = side === 'home' ? jogo.fromHome : jogo.fromAway;
+    if (fromId) {
+        const f = findGame(fromId);
+        const verbo = jogo.tipo === 'terceiro' ? 'Perdedor' : 'Vencedor';
+        if (f && f.home !== 'TBD' && f.away !== 'TBD') {
+            return `<span class="ch-tbd">${verbo}: ${f.home} × ${f.away}</span>`;
+        }
+        return `<span class="ch-tbd">${verbo} Jogo ${f ? f.match : ''}</span>`;
+    }
+    return `<span class="ch-tbd">A definir</span>`;
+}
+
+function renderChaveamento() {
+    preencherChaveamento();
+    const c = document.getElementById('chaveamento');
+    if (!c) return;
+    const fases = [
+        ['16avos', '16-avos de Final'],
+        ['oitavas', 'Oitavas de Final'],
+        ['quartas', 'Quartas de Final'],
+        ['semis', 'Semifinais'],
+        ['final', 'Final & 3º Lugar']
+    ];
+    let html = `<h2 class="section-title"><svg class="ti-ic"><use href="#ic-bracket"></use></svg> Chaveamento</h2>
+        <div class="info-box"><span>Árvore do mata-mata (somente consulta). Os confrontos das próximas fases aparecem automaticamente conforme os jogos vão sendo decididos.</span></div>
+        <div class="bracket">`;
+    fases.forEach(([key, label]) => {
+        const fase = KNOCKOUT_STAGES_2026[key];
+        if (!fase) return;
+        html += `<div class="bracket-col"><h3 class="bracket-h">${label}</h3>`;
+        fase.jogos.forEach(j => {
+            const r = state.gameResults[j.id];
+            const temPlacar = r && r.homeGoals !== undefined && r.homeGoals !== null;
+            const hWin = temPlacar && r.advancedTeam && r.advancedTeam === j.home;
+            const aWin = temPlacar && r.advancedTeam && r.advancedTeam === j.away;
+            const sc = temPlacar ? `<span class="ch-score">${r.homeGoals}–${r.awayGoals}</span>` : `<span class="ch-vs">×</span>`;
+            html += `<div class="ch-match">
+                <div class="ch-row ${hWin ? 'win' : ''}">${slotChaveamento(j, 'home')}</div>
+                <div class="ch-center">${sc}</div>
+                <div class="ch-row ${aWin ? 'win' : ''}">${slotChaveamento(j, 'away')}</div>
+                <div class="ch-meta">${fmtData(j.data)} · ${j.hora}h · Jogo ${j.match}</div>
+            </div>`;
+        });
+        html += `</div>`;
+    });
+    html += `</div>`;
+    c.innerHTML = html;
+}
+
+// ====================
 // NAVIGATION
 // ====================
 
@@ -1364,7 +1453,7 @@ function switchTab(tabName) {
         home:['ic-home','Home'], overall:['ic-prev','Previsões Gerais'], grupos:['ic-grupos','Fase de Grupos'],
         r16:['ic-bracket','16avos de Final'], oitavas:['ic-bracket','Oitavas de Final'], quartas:['ic-bracket','Quartas de Final'],
         semis:['ic-bracket','Semifinais'], final:['ic-trophy','Final'], ranking:['ic-ranking','Classificação'],
-        proximos:['ic-grupos','Próximos Jogos']
+        proximos:['ic-grupos','Próximos Jogos'], chaveamento:['ic-bracket','Chaveamento']
     };
     const pt = document.getElementById('pageTitle');
     if (pt && TITLES[tabName]) pt.innerHTML = `<svg class="ti-ic"><use href="#${TITLES[tabName][0]}"></use></svg> ${TITLES[tabName][1]}`;
@@ -1412,6 +1501,8 @@ function switchTab(tabName) {
         renderKnockoutPhase('semis');
     } else if (tabName === 'final') {
         renderKnockoutPhase('final');
+    } else if (tabName === 'chaveamento') {
+        renderChaveamento();
     } else if (tabName === 'home') {
         renderParticipants();
     }
