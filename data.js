@@ -129,69 +129,72 @@ const GRUPOS_COPA_2026 = {
 };
 
 // ============================================================
-// FASES DE KNOCKOUT — horários serão atualizados conforme definidos
+// FASES DE KNOCKOUT
+// R32 (16avos) com confrontos oficiais. Demais fases preenchidas
+// automaticamente pelo app via os campos fromHome/fromAway (id do jogo
+// cujo vencedor entra). final_3rd usa os PERDEDORES das semis (tipo: 'terceiro').
 // ============================================================
 const KNOCKOUT_STAGES_2026 = {
     '16avos': {
         nome: 'Round of 32 (16avos de Final)',
         multiplier: 1.5,
         jogos: [
-            { id: 'r32_1',  home: 'TBD', away: 'TBD', data: '2026-06-28', hora: '16:00' },
-            { id: 'r32_2',  home: 'TBD', away: 'TBD', data: '2026-06-29', hora: '14:00' },
-            { id: 'r32_3',  home: 'TBD', away: 'TBD', data: '2026-06-29', hora: '17:30' },
-            { id: 'r32_4',  home: 'TBD', away: 'TBD', data: '2026-06-29', hora: '22:00' },
-            { id: 'r32_5',  home: 'TBD', away: 'TBD', data: '2026-06-30', hora: '14:00' },
-            { id: 'r32_6',  home: 'TBD', away: 'TBD', data: '2026-06-30', hora: '18:00' },
-            { id: 'r32_7',  home: 'TBD', away: 'TBD', data: '2026-06-30', hora: '22:00' },
-            { id: 'r32_8',  home: 'TBD', away: 'TBD', data: '2026-07-01', hora: '13:00' },
-            { id: 'r32_9',  home: 'TBD', away: 'TBD', data: '2026-07-01', hora: '17:00' },
-            { id: 'r32_10', home: 'TBD', away: 'TBD', data: '2026-07-01', hora: '21:00' },
-            { id: 'r32_11', home: 'TBD', away: 'TBD', data: '2026-07-02', hora: '16:00' },
-            { id: 'r32_12', home: 'TBD', away: 'TBD', data: '2026-07-02', hora: '20:00' },
-            { id: 'r32_13', home: 'TBD', away: 'TBD', data: '2026-07-03', hora: '00:00' },
-            { id: 'r32_14', home: 'TBD', away: 'TBD', data: '2026-07-03', hora: '15:00' },
-            { id: 'r32_15', home: 'TBD', away: 'TBD', data: '2026-07-03', hora: '19:00' },
-            { id: 'r32_16', home: 'TBD', away: 'TBD', data: '2026-07-03', hora: '22:30' },
+            { id: 'r32_1', home: 'África do Sul', away: 'Canadá', data: '2026-06-28', hora: '16:00', match: 73 },
+            { id: 'r32_2', home: 'Brasil', away: 'Japão', data: '2026-06-29', hora: '14:00', match: 76 },
+            { id: 'r32_3', home: 'Alemanha', away: 'Paraguai', data: '2026-06-29', hora: '17:30', match: 74 },
+            { id: 'r32_4', home: 'Países Baixos', away: 'Marrocos', data: '2026-06-29', hora: '22:00', match: 75 },
+            { id: 'r32_5', home: 'Costa do Marfim', away: 'Noruega', data: '2026-06-30', hora: '14:00', match: 78 },
+            { id: 'r32_6', home: 'França', away: 'Suécia', data: '2026-06-30', hora: '18:00', match: 77 },
+            { id: 'r32_7', home: 'México', away: 'Equador', data: '2026-06-30', hora: '22:00', match: 79 },
+            { id: 'r32_8', home: 'Inglaterra', away: 'RD Congo', data: '2026-07-01', hora: '13:00', match: 80 },
+            { id: 'r32_9', home: 'Bélgica', away: 'Senegal', data: '2026-07-01', hora: '17:00', match: 82 },
+            { id: 'r32_10', home: 'Estados Unidos', away: 'Bósnia e Herzegovina', data: '2026-07-01', hora: '21:00', match: 81 },
+            { id: 'r32_11', home: 'Espanha', away: 'Áustria', data: '2026-07-02', hora: '16:00', match: 84 },
+            { id: 'r32_12', home: 'Portugal', away: 'Croácia', data: '2026-07-02', hora: '20:00', match: 83 },
+            { id: 'r32_13', home: 'Suíça', away: 'Argélia', data: '2026-07-03', hora: '00:00', match: 85 },
+            { id: 'r32_14', home: 'Austrália', away: 'Egito', data: '2026-07-03', hora: '15:00', match: 88 },
+            { id: 'r32_15', home: 'Argentina', away: 'Cabo Verde', data: '2026-07-03', hora: '19:00', match: 86 },
+            { id: 'r32_16', home: 'Colômbia', away: 'Gana', data: '2026-07-03', hora: '22:30', match: 87 },
         ]
     },
     'oitavas': {
         nome: 'Round of 16 (Oitavas de Final)',
         multiplier: 2,
         jogos: [
-            { id: 'r16_1', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '14:00' },
-            { id: 'r16_2', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '18:00' },
-            { id: 'r16_3', home: 'TBD', away: 'TBD', data: '2026-07-05', hora: '17:00' },
-            { id: 'r16_4', home: 'TBD', away: 'TBD', data: '2026-07-05', hora: '21:00' },
-            { id: 'r16_5', home: 'TBD', away: 'TBD', data: '2026-07-06', hora: '16:00' },
-            { id: 'r16_6', home: 'TBD', away: 'TBD', data: '2026-07-06', hora: '21:00' },
-            { id: 'r16_7', home: 'TBD', away: 'TBD', data: '2026-07-07', hora: '13:00' },
-            { id: 'r16_8', home: 'TBD', away: 'TBD', data: '2026-07-07', hora: '17:00' },
+            { id: 'r16_1', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '14:00', match: 89, fromHome: 'r32_3', fromAway: 'r32_6' },
+            { id: 'r16_2', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '18:00', match: 90, fromHome: 'r32_1', fromAway: 'r32_4' },
+            { id: 'r16_3', home: 'TBD', away: 'TBD', data: '2026-07-05', hora: '17:00', match: 91, fromHome: 'r32_2', fromAway: 'r32_5' },
+            { id: 'r16_4', home: 'TBD', away: 'TBD', data: '2026-07-05', hora: '21:00', match: 92, fromHome: 'r32_7', fromAway: 'r32_8' },
+            { id: 'r16_5', home: 'TBD', away: 'TBD', data: '2026-07-06', hora: '16:00', match: 93, fromHome: 'r32_12', fromAway: 'r32_11' },
+            { id: 'r16_6', home: 'TBD', away: 'TBD', data: '2026-07-06', hora: '21:00', match: 94, fromHome: 'r32_10', fromAway: 'r32_9' },
+            { id: 'r16_7', home: 'TBD', away: 'TBD', data: '2026-07-07', hora: '13:00', match: 95, fromHome: 'r32_15', fromAway: 'r32_14' },
+            { id: 'r16_8', home: 'TBD', away: 'TBD', data: '2026-07-07', hora: '17:00', match: 96, fromHome: 'r32_13', fromAway: 'r32_16' },
         ]
     },
     'quartas': {
         nome: 'Quartas de Final',
         multiplier: 3,
         jogos: [
-            { id: 'qf_1', home: 'TBD', away: 'TBD', data: '2026-07-09', hora: '17:00' },
-            { id: 'qf_2', home: 'TBD', away: 'TBD', data: '2026-07-10', hora: '16:00' },
-            { id: 'qf_3', home: 'TBD', away: 'TBD', data: '2026-07-11', hora: '18:00' },
-            { id: 'qf_4', home: 'TBD', away: 'TBD', data: '2026-07-11', hora: '22:00' },
+            { id: 'qf_1', home: 'TBD', away: 'TBD', data: '2026-07-09', hora: '17:00', match: 97, fromHome: 'r16_1', fromAway: 'r16_2' },
+            { id: 'qf_2', home: 'TBD', away: 'TBD', data: '2026-07-10', hora: '16:00', match: 98, fromHome: 'r16_5', fromAway: 'r16_6' },
+            { id: 'qf_3', home: 'TBD', away: 'TBD', data: '2026-07-11', hora: '18:00', match: 99, fromHome: 'r16_3', fromAway: 'r16_4' },
+            { id: 'qf_4', home: 'TBD', away: 'TBD', data: '2026-07-11', hora: '22:00', match: 100, fromHome: 'r16_7', fromAway: 'r16_8' },
         ]
     },
     'semis': {
         nome: 'Semifinais',
         multiplier: 4,
         jogos: [
-            { id: 'sf_1', home: 'TBD', away: 'TBD', data: '2026-07-14', hora: '16:00' },
-            { id: 'sf_2', home: 'TBD', away: 'TBD', data: '2026-07-15', hora: '16:00' },
+            { id: 'sf_1', home: 'TBD', away: 'TBD', data: '2026-07-14', hora: '16:00', match: 101, fromHome: 'qf_1', fromAway: 'qf_2' },
+            { id: 'sf_2', home: 'TBD', away: 'TBD', data: '2026-07-15', hora: '16:00', match: 102, fromHome: 'qf_3', fromAway: 'qf_4' },
         ]
     },
     'final': {
         nome: 'Final & 3º Lugar',
         multiplier: 5,
         jogos: [
-            { id: 'final_3rd', home: 'TBD', away: 'TBD', data: '2026-07-18', hora: '18:00', desc: '3º Lugar' },
-            { id: 'final_1st', home: 'TBD', away: 'TBD', data: '2026-07-19', hora: '16:00', desc: 'Grande Final' },
+            { id: 'final_3rd', home: 'TBD', away: 'TBD', data: '2026-07-18', hora: '18:00', match: 103, tipo: 'terceiro', fromHome: 'sf_1', fromAway: 'sf_2', desc: '3º Lugar' },
+            { id: 'final_1st', home: 'TBD', away: 'TBD', data: '2026-07-19', hora: '16:00', match: 104, fromHome: 'sf_1', fromAway: 'sf_2', desc: 'Grande Final' },
         ]
     }
 };
