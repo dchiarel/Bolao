@@ -165,6 +165,23 @@ const JOGOS_MAPA = {
     'Panamá|Croácia':     'l4',
     'Panamá|Inglaterra':  'l5',
     'Croácia|Gana':       'l6',
+    // Mata-mata — 28-avos (R32). Ordem oficial FIFA (mesma do data.js).
+    'África do Sul|Canadá':              'r32_1',
+    'Brasil|Japão':                      'r32_2',
+    'Alemanha|Paraguai':                 'r32_3',
+    'Países Baixos|Marrocos':            'r32_4',
+    'Costa do Marfim|Noruega':           'r32_5',
+    'França|Suécia':                     'r32_6',
+    'México|Equador':                    'r32_7',
+    'Inglaterra|RD Congo':               'r32_8',
+    'Bélgica|Senegal':                   'r32_9',
+    'Estados Unidos|Bósnia e Herzegovina':'r32_10',
+    'Espanha|Áustria':                   'r32_11',
+    'Portugal|Croácia':                  'r32_12',
+    'Suíça|Argélia':                     'r32_13',
+    'Austrália|Egito':                   'r32_14',
+    'Argentina|Cabo Verde':              'r32_15',
+    'Colômbia|Gana':                     'r32_16',
 };
 
 function encontrarGameId(homeRaw, awayRaw) {
