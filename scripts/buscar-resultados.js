@@ -378,6 +378,8 @@ async function buscarTheSportsDB() {
 // correção "gruda" e não é desfeita nas próximas execuções do robô.
 // Formato: 'gameId': { homeGoals, awayGoals, advancedTeam }
 // (advancedTeam = time da casa se venceu, visitante se venceu, '' se empate)
+// Mata-mata nos pênaltis: mantenha o placar do tempo normal e ponha o
+// classificado em advancedTeam (o robô não sabe o vencedor dos pênaltis).
 // ============================================================
 const CORRECOES_MANUAIS = {
     'e1': { homeGoals: 7, awayGoals: 1, advancedTeam: 'Alemanha' }, // Alemanha 7 x 1 Curaçao
@@ -387,6 +389,8 @@ const CORRECOES_MANUAIS = {
     'b4': { homeGoals: 4, awayGoals: 1, advancedTeam: 'Suíça' }, // Suíça 4 x 1 Bósnia
     'g4': { homeGoals: 1, awayGoals: 3, advancedTeam: 'Egito' }, // Nova Zelândia 1 x 3 Egito
     'g6': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Egito 1 x 1 Irã
+    // --- Mata-mata: jogos decididos nos PÊNALTIS (fonte não traz o vencedor) ---
+    'r32_3': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Paraguai' }, // 1-1, Paraguai 5x4 nos pênaltis
 };
 
 // ============================================================
