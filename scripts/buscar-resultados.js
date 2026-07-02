@@ -391,6 +391,9 @@ const CORRECOES_MANUAIS = {
     'g6': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Egito 1 x 1 Irã
     // --- Mata-mata: jogos decididos nos PÊNALTIS (fonte não traz o vencedor) ---
     'r32_3': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Paraguai' }, // 1-1, Paraguai 5x4 nos pênaltis
+    'r32_4': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Marrocos' }, // 1-1, Marrocos 3x2 nos pênaltis
+    // --- Fonte (thesportsdb) trouxe placar errado ---
+    'r32_9': { homeGoals: 2, awayGoals: 2, advancedTeam: 'Bélgica' }, // 2-2 no tempo normal, Bélgica venceu na prorrogação (3-2)
 };
 
 // ============================================================
