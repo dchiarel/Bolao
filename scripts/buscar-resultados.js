@@ -378,8 +378,11 @@ async function buscarTheSportsDB() {
 // correção "gruda" e não é desfeita nas próximas execuções do robô.
 // Formato: 'gameId': { homeGoals, awayGoals, advancedTeam }
 // (advancedTeam = time da casa se venceu, visitante se venceu, '' se empate)
-// Mata-mata nos pênaltis: mantenha o placar do tempo normal e ponha o
-// classificado em advancedTeam (o robô não sabe o vencedor dos pênaltis).
+// REGRA DE PLACAR NO MATA-MATA: o placar que conta pra pontuação é o placar
+// ao FINAL DA PRORROGAÇÃO (90min + 30min extra, se houver), não o do tempo
+// normal. Se o jogo foi decidido nos pênaltis sem gols na prorrogação, o
+// placar do fim da prorrogação é igual ao do tempo normal. Bônus "quem
+// avança" sempre reflete o classificado final (após pênaltis, se houver).
 // ============================================================
 const CORRECOES_MANUAIS = {
     'e1': { homeGoals: 7, awayGoals: 1, advancedTeam: 'Alemanha' }, // Alemanha 7 x 1 Curaçao
@@ -389,11 +392,11 @@ const CORRECOES_MANUAIS = {
     'b4': { homeGoals: 4, awayGoals: 1, advancedTeam: 'Suíça' }, // Suíça 4 x 1 Bósnia
     'g4': { homeGoals: 1, awayGoals: 3, advancedTeam: 'Egito' }, // Nova Zelândia 1 x 3 Egito
     'g6': { homeGoals: 1, awayGoals: 1, advancedTeam: '' }, // Egito 1 x 1 Irã
-    // --- Mata-mata: jogos decididos nos PÊNALTIS (fonte não traz o vencedor) ---
-    'r32_3': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Paraguai' }, // 1-1, Paraguai 5x4 nos pênaltis
-    'r32_4': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Marrocos' }, // 1-1, Marrocos 3x2 nos pênaltis
-    // --- Fonte (thesportsdb) trouxe placar errado ---
-    'r32_9': { homeGoals: 2, awayGoals: 2, advancedTeam: 'Bélgica' }, // 2-2 no tempo normal, Bélgica venceu na prorrogação (3-2)
+    // --- Mata-mata: jogos decididos nos PÊNALTIS, sem gols na prorrogação ---
+    'r32_3': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Paraguai' }, // 1-1 ao fim da prorrogação, Paraguai 5x4 nos pênaltis
+    'r32_4': { homeGoals: 1, awayGoals: 1, advancedTeam: 'Marrocos' }, // 1-1 ao fim da prorrogação, Marrocos 3x2 nos pênaltis
+    // --- Mata-mata: decidido AINDA na prorrogação (gol na prorrogação) ---
+    'r32_9': { homeGoals: 3, awayGoals: 2, advancedTeam: 'Bélgica' }, // 2-2 no tempo normal, Bélgica fez o gol da vitória na prorrogação: 3-2 ao fim da prorrogação
 };
 
 // ============================================================
