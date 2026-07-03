@@ -784,6 +784,16 @@ function calculateScoreGame(participantId, gameId) {
 
     // Apply multiplier
     const multiplier = getMultiplierForGame(gameId);
+
+    // Golden Tipp: aposta de TUDO OU NADA. Se o jogo foi marcado como Golden,
+    // ele vale 3× os pontos máximos (10 × multiplier × 3) SOMENTE se o placar
+    // for exato; caso contrário vale 0 — o participante perde até os pontos
+    // normais que faria. Isso substitui completamente a pontuação normal.
+    if (isGolden(participantId, gameId)) {
+        const acertouPlacarExato = (m && homeGoals === predHome && awayGoals === predAway);
+        return acertouPlacarExato ? 10 * multiplier * 3 : 0;
+    }
+
     return Math.round(points * multiplier);
 }
 
@@ -804,30 +814,9 @@ function calculateScoreOverall(participantId) {
     return points;
 }
 
-function calculateScoreGoldenTipps(participantId) {
-    let points = 0;
-    const tipps = state.goldenTipps[participantId] || [];
-
-    tipps.forEach(tipp => {
-        const result = state.gameResults[tipp.gameId];
-        if (!result) return;
-
-        const prediction = state.gamesPredictions[participantId]?.[tipp.gameId];
-        if (!prediction) return;
-
-        // Palpite só vale se completo no formato "X-Y"
-        const m = /^(\d+)-(\d+)$/.exec(prediction.winner || '');
-        if (!m) return;
-
-        // Only award points if perfect score
-        if (result.homeGoals === parseInt(m[1]) && result.awayGoals === parseInt(m[2])) {
-            const basePoints = 10 * getMultiplierForGame(tipp.gameId);
-            points += basePoints * 3; // Triple the score
-        }
-    });
-
-    return points;
-}
+// A pontuação dos Golden Tipps é aplicada dentro de calculateScoreGame
+// (regra tudo-ou-nada: 3× se placar exato, senão 0). Por isso não existe mais
+// uma função separada de cálculo de Golden Tipps.
 
 function getTotalScore(participantId) {
     let total = 0;
@@ -849,8 +838,9 @@ function getTotalScore(participantId) {
     // Overall predictions
     total += calculateScoreOverall(participantId);
 
-    // Golden Tipps
-    total += calculateScoreGoldenTipps(participantId);
+    // Golden Tipps já estão embutidos em calculateScoreGame (jogos marcados
+    // como Golden valem 3× se placar exato, senão 0). Não somar novamente aqui
+    // para não contar em dobro.
 
     return total;
 }
@@ -865,18 +855,22 @@ function getScoreBreakdown(participantId) {
         });
     });
 
-    // Knockouts
+    // Knockouts: jogos marcados como Golden vão para a coluna goldenTipps;
+    // os demais para knockouts. Cada jogo é contado uma única vez, então
+    // grupos + knockouts + overall + goldenTipps == getTotalScore.
     Object.values(KNOCKOUT_STAGES_2026).forEach(stage => {
         stage.jogos.forEach(jogo => {
-            knockouts += calculateScoreGame(participantId, jogo.id);
+            const pts = calculateScoreGame(participantId, jogo.id);
+            if (isGolden(participantId, jogo.id)) {
+                goldenTipps += pts;
+            } else {
+                knockouts += pts;
+            }
         });
     });
 
     // Overall
     overall = calculateScoreOverall(participantId);
-
-    // Golden Tipps
-    goldenTipps = calculateScoreGoldenTipps(participantId);
 
     return { grupos, knockouts, overall, goldenTipps };
 }
