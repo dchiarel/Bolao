@@ -161,8 +161,8 @@ const KNOCKOUT_STAGES_2026 = {
         nome: 'Round of 16 (Oitavas de Final)',
         multiplier: 2,
         jogos: [
-            { id: 'r16_1', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '14:00', match: 89, fromHome: 'r32_3', fromAway: 'r32_6' },
-            { id: 'r16_2', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '18:00', match: 90, fromHome: 'r32_1', fromAway: 'r32_4' },
+            { id: 'r16_1', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '18:00', match: 89, fromHome: 'r32_3', fromAway: 'r32_6' },
+            { id: 'r16_2', home: 'TBD', away: 'TBD', data: '2026-07-04', hora: '14:00', match: 90, fromHome: 'r32_1', fromAway: 'r32_4' },
             { id: 'r16_3', home: 'TBD', away: 'TBD', data: '2026-07-05', hora: '17:00', match: 91, fromHome: 'r32_2', fromAway: 'r32_5' },
             { id: 'r16_4', home: 'TBD', away: 'TBD', data: '2026-07-05', hora: '21:00', match: 92, fromHome: 'r32_7', fromAway: 'r32_8' },
             { id: 'r16_5', home: 'TBD', away: 'TBD', data: '2026-07-06', hora: '16:00', match: 93, fromHome: 'r32_12', fromAway: 'r32_11' },
