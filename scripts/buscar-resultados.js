@@ -69,6 +69,7 @@ const NOME_MAP = {
     'qatar': 'Catar',
     'dr congo': 'RD Congo', 'democratic republic of congo': 'RD Congo', 'congo dr': 'RD Congo',
     'uzbekistan': 'Uzbequistão',
+    'egypt': 'Egito', 'egipto': 'Egito',
 };
 
 function normalizarTime(nome) {
@@ -225,11 +226,16 @@ async function buscarOpenFootball() {
         if (!gameId) return;
 
         const score = match.score || match.ft;
-        let homeGoals = null, awayGoals = null;
+        let homeGoals = null, awayGoals = null, penaltyHome = null, penaltyAway = null;
         if (score) {
             if (typeof score === 'string') {
                 const parts = score.split(/[:\-]/).map(Number);
                 homeGoals = parts[0]; awayGoals = parts[1];
+            } else if (Array.isArray(score.et)) {
+                // Mata-mata decidido (ou não) na prorrogação: o placar ao FINAL
+                // DA PRORROGAÇÃO é o que conta pra pontuação (regra do bolão),
+                // não o do tempo normal. Tem prioridade sobre "ft".
+                homeGoals = score.et[0]; awayGoals = score.et[1];
             } else if (Array.isArray(score.ft)) {
                 homeGoals = score.ft[0]; awayGoals = score.ft[1];
             } else if (score.ft && typeof score.ft === 'string') {
@@ -238,12 +244,21 @@ async function buscarOpenFootball() {
             } else if (typeof score.home === 'number') {
                 homeGoals = score.home; awayGoals = score.away;
             }
+            if (Array.isArray(score.p)) {
+                penaltyHome = score.p[0]; penaltyAway = score.p[1];
+            }
         }
         if (homeGoals === null || isNaN(homeGoals)) return;
 
         let advancedTeam = '';
         if (homeGoals > awayGoals) advancedTeam = normalizarTime(homeRaw);
         else if (awayGoals > homeGoals) advancedTeam = normalizarTime(awayRaw);
+        else if (penaltyHome !== null && penaltyAway !== null) {
+            // Empate ao fim da prorrogação: pênaltis só decidem quem avança,
+            // o placar de gols (empate) continua sendo o que vale pontos.
+            if (penaltyHome > penaltyAway) advancedTeam = normalizarTime(homeRaw);
+            else if (penaltyAway > penaltyHome) advancedTeam = normalizarTime(awayRaw);
+        }
 
         const redCards = { home: [], away: [] };
         (match.goals || []).forEach(g => {
