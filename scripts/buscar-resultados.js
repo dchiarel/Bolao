@@ -12,10 +12,12 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import path from 'path';
+import vm from 'vm';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const RESULTADOS_PATH = path.join(__dirname, '..', 'resultados_2026.json');
+const DATA_JS_PATH = path.join(__dirname, '..', 'data.js');
 
 // ============================================================
 // MAPEAMENTO DE TIMES: variações de nome → nome no app
@@ -185,10 +187,72 @@ const JOGOS_MAPA = {
     'Colômbia|Gana':                     'r32_16',
 };
 
+// ============================================================
+// CHAVEAMENTO DINÂMICO: oitavas (r16) em diante só têm os times
+// definidos depois que a fase anterior termina (fromHome/fromAway em
+// data.js), então não dá pra ter um JOGOS_MAPA estático pra eles como
+// nos grupos/28-avos. Resolvemos os confrontos a cada rodada do robô,
+// espelhando a mesma lógica de vencedorJogo/perdedorJogo do app.js.
+// ============================================================
+let JOGOS_MAPA_DINAMICO = {};
+
+function carregarKnockoutStages() {
+    const source = fs.readFileSync(DATA_JS_PATH, 'utf8') + `\nthis.KNOCKOUT_STAGES_2026 = KNOCKOUT_STAGES_2026;`;
+    const ctx = {};
+    vm.createContext(ctx);
+    vm.runInContext(source, ctx, { filename: DATA_JS_PATH });
+    return ctx.KNOCKOUT_STAGES_2026;
+}
+
+function resolverChaveamento(knockoutStages, gameResults) {
+    const jogosPorId = {};
+    (knockoutStages['16avos']?.jogos || []).forEach(j => {
+        jogosPorId[j.id] = { home: j.home, away: j.away };
+    });
+
+    const vencedor = (id) => {
+        const r = gameResults[id];
+        return (r && r.advancedTeam) ? r.advancedTeam : null;
+    };
+    const perdedor = (id) => {
+        const r = gameResults[id];
+        const j = jogosPorId[id];
+        if (!r || !r.advancedTeam || !j || j.home === 'TBD' || j.away === 'TBD') return null;
+        return r.advancedTeam === j.home ? j.away : j.home;
+    };
+
+    ['oitavas', 'quartas', 'semis', 'final'].forEach(stageKey => {
+        (knockoutStages[stageKey]?.jogos || []).forEach(j => {
+            let home = 'TBD', away = 'TBD';
+            if (j.tipo === 'terceiro') {
+                home = perdedor(j.fromHome) || 'TBD';
+                away = perdedor(j.fromAway) || 'TBD';
+            } else {
+                if (j.fromHome) home = vencedor(j.fromHome) || 'TBD';
+                if (j.fromAway) away = vencedor(j.fromAway) || 'TBD';
+            }
+            jogosPorId[j.id] = { home, away };
+        });
+    });
+
+    return jogosPorId;
+}
+
+function construirMapaDinamico(jogosPorId) {
+    const mapa = {};
+    Object.entries(jogosPorId).forEach(([gameId, { home, away }]) => {
+        if (home !== 'TBD' && away !== 'TBD') {
+            mapa[`${home}|${away}`] = gameId;
+        }
+    });
+    return mapa;
+}
+
 function encontrarGameId(homeRaw, awayRaw) {
     const home = normalizarTime(homeRaw);
     const away = normalizarTime(awayRaw);
-    return JOGOS_MAPA[`${home}|${away}`] || null;
+    const key = `${home}|${away}`;
+    return JOGOS_MAPA[key] || JOGOS_MAPA_DINAMICO[key] || null;
 }
 
 // ============================================================
@@ -431,6 +495,14 @@ async function main() {
         } catch(e) {
             console.log('⚠️ Erro ao ler arquivo existente, criando novo.');
         }
+    }
+
+    const knockoutStages = carregarKnockoutStages();
+    const jogosPorId = resolverChaveamento(knockoutStages, dadosAtuais.gameResults || {});
+    JOGOS_MAPA_DINAMICO = construirMapaDinamico(jogosPorId);
+    const novosConfrontos = Object.entries(JOGOS_MAPA_DINAMICO).filter(([, id]) => id.startsWith('r16_') || id.startsWith('qf_') || id.startsWith('sf_') || id.startsWith('final_'));
+    if (novosConfrontos.length) {
+        console.log(`🔀 Chaveamento resolvido: ${novosConfrontos.map(([par, id]) => `${id}=${par}`).join(', ')}`);
     }
 
     let novosResultados = {};
